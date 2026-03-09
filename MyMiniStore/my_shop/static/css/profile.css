@@ -1,0 +1,183 @@
+/* static/css/profile.css */
+
+:root {
+    --bg-dark: #0f1113;
+    --card-bg: #1a1d21;
+    --accent-blue: #3498db;
+    --text-white: #ffffff;
+    --text-muted: #8e959c;
+    --border-color: #2c3136;
+    --success-green: #2ecc71;
+    --warning-orange: #e67e22;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* Карточка профілю (ліва частина) */
+.profile-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.profile-header .avatar-wrapper img {
+    border: 3px solid var(--accent-blue);
+    padding: 5px;
+    background: var(--bg-dark);
+    transition: transform 0.3s ease;
+}
+
+.profile-header .avatar-wrapper img:hover {
+    transform: scale(1.05);
+}
+
+/* Стилізація форм */
+.form-group p {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 12px 15px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+}
+
+/* Список замовлень (права частина) */
+.order-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease;
+}
+
+.order-item:hover {
+    border-color: #444;
+}
+
+.order-header span {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.order-body ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.order-body ul li:last-child {
+    border-bottom: none;
+}
+
+/* Кнопки */
+.btn-register {
+    background: var(--accent-blue);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* Додайте це до вашого profile.css */
+
+/* Приховуємо технічні підписи Django (Required, 150 characters...) */
+.form-group .helptext {
+    display: none;
+}
+
+/* Стилізація віджета картинки (Currently: ... Change: ...) */
+.form-group input[type="file"] {
+    padding: 10px;
+    background: var(--bg-dark);
+    border: 1px dashed var(--border-color);
+    cursor: pointer;
+}
+
+/* Стилізація чекбокса "Clear" (Видалити фото) */
+.form-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    accent-color: var(--accent-blue); /* Колір галочки під стиль сайту */
+    vertical-align: middle;
+}
+
+/* Текст біля чекбокса */
+.form-group label[for$="-clear_id"] {
+    display: inline-block;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--warning-orange);
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* Робимо вигляд посилань у формі (Currently: avatars/...) більш приємним */
+.form-group a {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-size: 0.75rem;
+    word-break: break-all;
+}
+
+.btn-register:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* Статуси */
+.status-paid {
+    color: var(--success-green);
+    font-weight: 600;
+}
+
+.status-pending {
+    color: var(--warning-orange);
+    font-weight: 600;
+}
+
+/* Адаптивність */
+@media (max-width: 992px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}

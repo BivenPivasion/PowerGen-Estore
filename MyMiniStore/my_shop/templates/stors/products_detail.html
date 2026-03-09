@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="product-page">
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="{% url 'product_list' %}">Каталог</a> 
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>{{ product.name }}</span>
+        </nav>
+
+        <div class="product-container">
+            <div class="product-gallery">
+                <div class="main-img-container">
+                    <img id="main-product-image" src="{{ product.main_image }}" alt="{{ product.name }}">
+                    <div class="zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Натисніть для збільшення</div>
+                </div>
+                <div class="thumbnails">
+                    <div class="thumb active" onclick="changeImage(this, '{{ product.main_image }}')">
+                        <img src="{{ product.main_image }}" alt="Main image">
+                    </div>
+                    {% for img in gallery %}
+                    <div class="thumb" onclick="changeImage(this, '{{ img.image.url }}')">
+                        <img src="{{ img.image.url }}" alt="Gallery thumbnail">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="product-info">
+                <div class="product-header">
+                    <span class="status-tag {% if product.stock > 0 %}instock{% else %}outofstock{% endif %}">
+                        <i class="fa-solid fa-circle"></i> 
+                        {% if product.stock > 0 %}В наявності: {{ product.stock }} шт.{% else %}Немає в наявності{% endif %}
+                    </span>
+                    <h1>{{ product.name }}</h1>
+                    <div class="price-big">${{ product.price }}</div>
+                </div>
+
+                <div class="purchase-panel">
+                    <div class="qty-selector">
+                        <button onclick="changeQty(-1)">-</button>
+                        <input type="number" id="product-qty-{{ product.id }}" value="1" min="1" max="{{ product.stock }}">
+                        <button onclick="changeQty(1)">+</button>
+                    </div>
+                    
+                    <button type="button" 
+                            class="btn primary-btn add-to-cart-btn" 
+                            data-url="{% url 'cart_add_with_quantity' product.id %}" 
+                            data-product-id="{{ product.id }}"
+                            onclick="addToCartWithQty(event, this)">
+                        <i class="fa-solid fa-cart-plus"></i> ДОДАТИ У КОШИК
+                    </button>
+                </div>
+
+                <div class="info-section">
+                    <h3>Опис продукту</h3>
+                    <p class="description-text">{{ product.description|linebreaks }}</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Технічні характеристики</h3>
+                    <div class="specs-grid">
+                        {% for spec in specifications %}
+                        <div class="spec-item">
+                            <span class="spec-label">{{ spec.feature.name }}</span>
+                            <span class="spec-dot"></span>
+                            <span class="spec-value">{{ spec.value }} {{ spec.feature.unit }}</span>
+                        </div>
+                        {% empty %}
+                        <p class="text-muted">Характеристики не вказані</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="../../static/js/cardFunctions.js"></script>
+<script>
+    function changeImage(element, imageUrl) {
+        document.getElementById('main-product-image').src = imageUrl;
+        document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+        element.classList.add('active');
+    }
+</script>
+{% endblock %}

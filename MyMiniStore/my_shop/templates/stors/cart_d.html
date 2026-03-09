@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container cart-page">
+    <h2 class="page-title">Ваш Кошик <span class="count">({{ cart|length }})</span></h2>
+
+    {% if cart|length > 0 %}
+    <div class="cart-layout">
+        <div class="cart-items-list">
+            {% for item in cart %}
+            <div class="cart-card" id="item-{{ item.product.id }}">
+                <div class="cart-card-img">
+                    <img src="{{ item.product.main_image }}" alt="{{ item.product.name }}">
+                </div>
+                
+                <div class="cart-card-info">
+                    <div class="item-header">
+                        <span class="category-tag">{{ item.product.category.name }}</span>
+                        <h3>{{ item.product.name }}</h3>
+                    </div>
+                    <div class="item-price-unit">${{ item.price }}</div>
+                </div>
+
+                <div class="cart-card-controls">
+                    <div class="qty-control">
+                        <button class="qty-btn" 
+                                onclick="updateCartItem('{{ item.product.id }}', 'minus')">-</button>
+                        
+                        <span class="qty-num" id="qty-{{ item.product.id }}">{{ item.quantity }}</span>
+                        
+                        <button class="qty-btn" 
+                                onclick="updateCartItem('{{ item.product.id }}', 'plus')">+</button>
+                    </div>
+                    <div class="item-total-price" id="total-{{ item.product.id }}">${{ item.total_price }}</div>
+                </div>
+
+                <a href="{% url 'cart_remove_product' item.product.id %}" class="item-remove" title="Видалити">
+                    <i class="fa-solid fa-trash-can"></i>
+                </a>
+            </div>
+            {% endfor %}
+            
+            <a href="{% url 'product_list' %}" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i> Продовжити покупки
+            </a>
+        </div>
+
+        <div class="cart-summary">
+            <div class="summary-box">
+                <h3>Підсумок замовлення</h3>
+                <div class="summary-line">
+                    <span>Товари ({{ cart|length }})</span>
+                    <span>${{ cart.get_total_price }}</span>
+                </div>
+                <div class="summary-line">
+                    <span>Доставка</span>
+                    <span class="free">Безкоштовно</span>
+                </div>
+                <hr>
+                <div class="summary-total">
+                    <span>Загальна сума</span>
+                    <span class="final-price">${{ cart.get_total_price }}</span>
+                </div>
+                <a href="{% url 'checkout' %}" class="btn primary-btn checkout-btn">
+                    ОФОРМИТИ ЗАМОВЛЕННЯ <i class="fa-solid fa-chevron-right"></i>
+                </a>
+                <div class="secure-checkout">
+                    <i class="fa-solid fa-shield-halved"></i> Безпечна оплата
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if recommendations %}
+    <div class="rec-section">
+        <h3 class="section-title">Вам також може сподобатись</h3>
+        <div class="products-grid">
+            {% for product in recommendations %}
+            <div class="product-card mini">
+                <div class="product-img">
+                    <img src="{{ product.main_image }}" alt="{{ product.name }}">
+                </div>
+                <h4>{{ product.name }}</h4>
+                <div class="card-footer">
+                    <span class="price">${{ product.price }}</span>
+                    <form action="{% url 'cart_add' product.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart-btn"><i class="fa-solid fa-plus"></i></button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="empty-cart-container">
+        <div class="empty-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+        <h3>Ваш кошик порожній</h3>
+        <p>Схоже, ви ще нічого не додали до свого замовлення.</p>
+        <a href="{% url 'product_list' %}" class="btn primary-btn">ПЕРЕЙТИ ДО КАТАЛОГУ</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="../../static/js/cardFunctions.js"></script>
+{% endblock %}

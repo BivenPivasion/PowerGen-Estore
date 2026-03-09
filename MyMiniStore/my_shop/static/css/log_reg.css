@@ -1,0 +1,151 @@
+:root {
+    --bg-dark: #0f1113;
+    --card-bg: #1a1d21;
+    --input-bg: #24282d;
+    --text-main: #ffffff;
+    --text-muted: #94a3b3;
+    --accent: #4fb3ff; 
+    --accent-green: #48bb78;
+    --error: #ff5f5f;
+    --border-radius: 12px;
+}
+
+.App {
+    width: 100%;
+    background-color: var(--bg-dark);
+}
+
+/* Загальна обгортка для центрування */
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh; /* Трохи більше висоти для довгих форм */
+    background-color: var(--bg-dark);
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+}
+
+/* Контейнер форми */
+.form-container {
+    background: var(--card-bg);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px; /* Трохи ширше для реєстрації */
+    border-radius: var(--border-radius);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Брендинг */
+.brand-logo {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.brand-logo span {
+    color: var(--accent-green);
+}
+
+h2 {
+    color: var(--text-main);
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+/* Помилки полів реєстрації */
+.field-error {
+    color: var(--error);
+    font-size: 0.8rem;
+    margin-top: 5px;
+    list-style: none;
+}
+
+/* Групи полів */
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 600;
+}
+
+/* Поля вводу (Django Widgets) */
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--input-bg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #2a2f35;
+    box-shadow: 0 0 0 3px rgba(79, 179, 255, 0.15);
+}
+
+/* Кнопка */
+.primary-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.primary-btn:hover {
+    background: #77c5ff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(79, 179, 255, 0.3);
+}
+
+/* Футер посилання */
+.form-footer {
+    text-align: center;
+    margin-top: 30px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.form-footer a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    transition: border 0.3s;
+}
+
+.form-footer a:hover {
+    border-bottom: 1px solid var(--accent);
+}

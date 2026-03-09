@@ -1,0 +1,307 @@
+/* product_list.css */
+
+/* --- Hero Section --- */
+.hero { 
+    padding: 100px 0; 
+    background: radial-gradient(circle at 80% 50%, rgba(79, 179, 255, 0.05) 0%, rgba(15, 17, 19, 1) 100%);
+    overflow: hidden;
+} 
+
+.hero-content { 
+    display: flex; 
+    align-items: center; 
+    gap: 60px; 
+} 
+
+.hero-text { flex: 1.2; }
+.hero-image { 
+    flex: 1; 
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image img {
+    width: 110%;
+    filter: drop-shadow(0 20px 50px rgba(0,0,0,0.8));
+    z-index: 2;
+}
+
+.image-glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: var(--primary);
+    filter: blur(120px);
+    opacity: 0.15;
+    z-index: 1;
+}
+
+.tag { 
+    background: rgba(72, 187, 120, 0.1); 
+    color: var(--accent-green); 
+    padding: 6px 14px; 
+    border-radius: 4px; 
+    font-size: 11px; 
+    font-weight: 800;
+    letter-spacing: 2px;
+} 
+
+.hero h1 { 
+    font-size: 56px; 
+    line-height: 1; 
+    margin: 25px 0; 
+    font-weight: 800;
+    letter-spacing: -2px;
+} 
+
+.highlight {
+    color: var(--text-muted);
+}
+
+.hero p {
+    color: var(--text-muted);
+    font-size: 18px;
+    margin-bottom: 35px;
+    max-width: 500px;
+}
+
+.btn-hero {
+    background: var(--primary);
+    color: #000;
+    padding: 16px 32px;
+    font-weight: 800;
+    font-size: 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+/* --- Products Grid --- */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+
+.view-all {
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.products-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 24px; 
+    margin-bottom: 80px;
+} 
+
+/* --- Product Card --- */
+.product-card { 
+    background: var(--bg-card); 
+    border-radius: 16px; 
+    position: relative; 
+    border: 1px solid rgba(255,255,255,0.03); 
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+} 
+
+.product-card:hover { 
+    border-color: rgba(79, 179, 255, 0.3); 
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+} 
+
+.product-img {
+    background: #141619;
+    padding: 30px;
+    height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-img img { 
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: contain; 
+    transition: 0.5s;
+}
+
+.product-card:hover .product-img img {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.category-tag {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--accent-green);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.product-card h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.description {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.4;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.price { 
+    font-weight: 700; 
+    color: #fff; 
+    font-size: 20px; 
+} 
+
+.add-to-cart-btn {
+    background: var(--primary);
+    color: #000;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-to-cart-btn:hover {
+    background: #fff;
+    transform: scale(1.05);
+}
+
+/* --- Badges --- */
+.badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 800;
+    z-index: 10;
+}
+
+.badge-new { background: #4fb3ff; color: #000; }
+.badge-sale { background: #f59e0b; color: #000; }
+
+/* --- Categories Section --- */
+.categories-section {
+    width: 100%;
+    padding: 40px 0 20px;
+}
+
+.category-scroll {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 5px 25px;
+    scrollbar-width: none; /* Для Firefox */
+}
+
+.category-scroll::-webkit-scrollbar {
+    display: none; /* Для Chrome/Safari */
+}
+
+.category-item {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    width: 150px;
+}
+
+.category-icon-wrapper {
+    width: 150px;
+    height: 150px;
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.category-icon-wrapper img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    object-fit: contain;
+    filter: grayscale(1) brightness(1.5);
+    transition: 0.3s;
+}
+
+.category-icon-wrapper i {
+    font-size: 24px;
+    color: var(--text-muted);
+}
+
+.category-item span {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-align: center;
+    transition: 0.3s;
+}
+
+/* Hover & Active States */
+.category-item:hover .category-icon-wrapper {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(79, 179, 255, 0.1);
+}
+
+.category-item:hover span, 
+.category-item.active span {
+    color: #fff;
+}
+
+.category-item.active .category-icon-wrapper {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.category-item.active .category-icon-wrapper img {
+    filter: brightness(1);
+}
+
+.category-item.active .category-icon-wrapper i {
+    color: #000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-content { flex-direction: column; text-align: center; }
+    .hero h1 { font-size: 36px; }
+    .hero-image img { width: 100%; }
+}

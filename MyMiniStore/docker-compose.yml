@@ -1,0 +1,35 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    container_name: backend_my_shop
+    command: gunicorn my_shop.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./my_shop:/app
+      - ./my_shop/media:/app/media
+      - ./my_shop/static:/app/static
+    working_dir: /app
+    env_file:
+      - ./.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:15
+    container_name: postgres_my_shop
+    env_file:
+      - ./.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    restart: always
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

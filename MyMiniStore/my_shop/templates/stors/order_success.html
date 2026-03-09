@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="order-success-page powergen">
+    <div class="success-card glass">
+
+        <div class="success-icon">✓</div>
+
+        <h1 class="success-title">Order successfully placed</h1>
+
+        <p class="success-text">
+            Thank you for your purchase!  
+            Order <strong>#{{ order.id }}</strong> confirmed.
+        </p>
+
+        <div class="order-info">
+            <div class="info-row">
+                <span>Full name</span>
+                <span>{{ order.full_name }}</span>
+            </div>
+            <div class="info-row">
+                <span>Email</span>
+                <span>{{ order.email }}</span>
+            </div>
+            <div class="info-row">
+                <span>Phone</span>
+                <span>{{ order.phone }}</span>
+            </div>
+            <div class="info-row">
+                <span>Payment</span>
+                <span>{{ order.payment_method }}</span>
+            </div>
+        </div>
+
+        <div class="success-actions">
+            <a href="{% url 'product_list' %}" class="btn-primary">
+                Continue shopping
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

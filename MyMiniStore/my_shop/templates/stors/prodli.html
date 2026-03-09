@@ -1,0 +1,95 @@
+{% extends "base.html" %} 
+{% load static %} 
+
+{% block extra_css %}
+<link rel="stylesheet" href="../../static/css/product_list.css">
+{% endblock %}
+ 
+{% block content %} 
+
+<section class="hero"> 
+    <div class="container hero-content"> 
+        <div class="hero-text"> 
+            <span class="tag">CRANHUS</span> 
+            <h1>INDUSTRIAL CALM.<br><span class="highlight">Power Your Future</span></h1> 
+            <p>Надійні енергетичні рішення для дому та промисловості з найнижчим рівнем шуму в індустрії.</p>
+            <a href="#products" class="btn btn-hero">EXPLORE GENERATORS</a> 
+        </div> 
+        <div class="hero-image"> 
+            <img src="https://pngimg.com/d/generator_PNG45.png" alt="Industrial Generator"> 
+            <div class="image-glow"></div>
+        </div> 
+    </div>
+</section>
+
+<section class="categories-section">
+    <div class="cat-container">
+        <div class="section-header">
+            <h2 class="section-title">Категорії обладнання</h2>
+        </div>
+        
+        <div class="category-scroll">
+            <a href="{% url 'product_list' %}" class="category-item {% if not category %}active{% endif %}">
+                <div class="category-icon-wrapper">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <span>Всі товари</span>
+            </a>
+
+            {% for cat in categories %}
+            <a href="{{ cat.get_absolute_url }}" class="category-item {% if category.id == cat.id %}active{% endif %}">
+                <div class="category-icon-wrapper">
+                    {% if cat.image %}
+                        <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+                    {% else %}
+                        <i class="fa-solid fa-microchip"></i>
+                    {% endif %}
+                </div>
+                <span>{{ cat.name }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+ 
+<div class="container" id="products">
+    <div class="section-header">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="view-all">View All <i class="fa-solid fa-arrow-right"></i></div>
+    </div>
+
+    <div class="products-grid"> 
+        {% for product in products %} 
+        <div class="product-card">
+            {% if forloop.first %}
+                <span class="badge badge-new">NEW AIDVIL</span>
+            {% elif forloop.counter == 4 %}
+                <span class="badge badge-sale">SALE</span>
+            {% endif %}
+
+            <div class="product-img"> 
+                <a href="{{ product.get_absolute_url }}"> 
+                    <img src="{{ product.main_image }}" alt="{{ product.name }}"> 
+                </a> 
+            </div> 
+            <div class="product-info">
+                <span class="category-tag">{{ product.category.name }}</span>
+                <h3>{{ product.name }}</h3> 
+                <p class="description">{{ product.short_description|truncatechars:60 }}</p> 
+                
+                <div class="card-footer">
+                    <span class="price">${{ product.price }}</span> 
+                    <button onclick="addToCart(event, this)" class="add-to-cart-btn" data-url="{% url 'cart_add' product.id %}">
+                        ADD TO CART
+                    </button> 
+                </div> 
+            </div>
+        </div> 
+        {% endfor %} 
+    </div> 
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="../../static/js/cardFunctions.js"></script>
+{% endblock %}

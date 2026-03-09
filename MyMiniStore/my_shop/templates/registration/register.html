@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/log_reg.css">
+    <title>Register page</title>
+</head>
+<body class="App">
+    <div class="auth-wrapper registration-page">
+        <div class="form-container">
+            <div class="brand-logo">POWER<span>GEN</span></div>
+            <h2>Реєстрація</h2>
+            
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+                
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="field-error">
+                                {{ field.errors|striptags }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                
+                <button type="submit" class="btn primary-btn">СТВОРИТИ АККАУНТ</button>
+            </form>
+            
+            <p class="form-footer">Вже є аккаунт? <a href="{% url 'login' %}">Увійти</a></p>
+        </div>
+    </div>
+</body>
+</html>
